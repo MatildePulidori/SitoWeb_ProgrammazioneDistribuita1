@@ -1,0 +1,115 @@
+body{ font-family: sans-serif; line-height: 1.6;
+    font-size: 100%;
+    text-align: center;
+    display: block;
+    color : black;
+    background-color: floralwhite;
+  }
+
+.navbar_website {  
+  overflow-x: hidden; 
+  width: 100%; 
+  font-size: 100%;
+  position: absolute;
+  transition: 0.4s;
+  z-index: 99;
+  padding-top: 5%;
+  padding-left: 5%;
+  float: left;
+}
+.logorsign {
+  overflow-x: hidden; 
+  margin-left: 5%;
+  float: left;
+  border-style: outset;
+  border-right-color: #c43b3e;
+  border-bottom-color: #c43b3e;
+  transition: 0.4s;
+  width: 40%;
+  font-size: 100%;
+}
+.login { 
+  float: left; 
+  overflow: visible; 
+  padding: 5%;
+}
+.signup { 
+  float: right; 
+  overflow: visible;
+  padding: 5%;
+}
+
+.logorsign label {
+  float: none;
+  background-color: #c43b3e;
+  color:floralwhite;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+label:hover { background-color: #c43b3e; color:floralwhite; }
+
+.login .log-content {
+  display: none;
+  position: relative;
+  overflow: visible;
+  padding-top: 10%;
+  z-index: 1;
+}
+.signup .log-content{
+  display: none;
+  position: relative;
+  overflow: visible;
+  padding-top: 10%;
+  z-index: 1; 
+}
+.login:hover .log-content { display: block;}
+.signup:hover .log-content { display: block;}
+
+.navbar_website input { float:left; padding-right: 5%; padding-top: 10%; padding-bottom: 5%; width: 100%; border-style: outset;}
+.navbar_website input[type=submit]{
+color: black;
+padding-top: 5%;
+padding-bottom: 5%;
+border: outset;
+cursor: pointer;
+}
+
+.main {float: right; margin-right: 10%;}
+h2 {  background-color: #c43b3e; color:floralwhite;}
+.posti {display: block; float: left; }
+.info {display: block; float: right; }
+input{ width: 100%;}
+form {
+  margin-left: auto; 
+  margin-right: auto; 
+  background-color: floralwhite; 
+  border-style: outset;
+  border-right-color: #c43b3e;
+  border-bottom-color: #c43b3e;
+  width: 95%;
+} 
+.table-info{
+  margin-left: auto; 
+  margin-right: auto; 
+  background-color: floralwhite; 
+  border-style: outset;
+  border-right-color: #c43b3e;
+  border-bottom-color: #c43b3e;
+  width: 100%;
+} 
+
+label { cursor: pointer;}
+.free {color: green;}
+.free:hover { color: floralwhite; background-color: green;}
+.occupied { color: orange; }
+.occupied:hover { color: floralwhite; background-color: orange;}
+.booked { color: red; }
+.booked:hover { color: floralwhite; background-color: red;}
+
+
+
+@media only screen and (max-width: 450px) {
+  body { width: auto;}
+  a {text-align: left; width: 100%; }
+}
