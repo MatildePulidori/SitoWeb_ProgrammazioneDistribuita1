@@ -1,36 +1,4 @@
 <?php
-
-function createTable($con, $m, $n){
-    $associaz =  array( 0=>'A', 1=>'B', 2=>'C', 3=>'D', 4=>'E', 5=>'F', 6=>'G', 7=>'H', 8=>'I', 9=>'J', 10=>'K') ;
-    $i = $j = 0;
-    echo "<table>";
-    while ( $i < $m  && $i < 25 ){  // righe 
-        echo "<tr>";
-        $fila = $associaz[$i];
-        $j=0;
-        while ($j < $n){ // colonne
-
-            $colonna = $j+1;
-            echo "<td>";
-
-            $x = $fila.''.$colonna;
-            $stato = checkIfInDB($con, $fila, $colonna); 
-            if ($stato == 'occupied'){
-               echo "<label class='$stato'><input type='checkbox' class='$stato' name='$x' value='$x' disabled >$x</label>";
-            } else if ($stato == 'booked'){
-                echo "<label class='$stato'><input type='checkbox' class='$stato' name='$x' value='$x' disabled checked>$x</label>";
-            } else if ($stato == 'free'){
-                echo "<label class='free'><input type='checkbox' class='free' name='$x' value='$x' disabled>$x</label>";
-            }
-            echo "</td>";
-            $j++;
-        }
-        echo "</tr>";
-    $i++;
-    }
-    echo "</table>";
-}
-
 function checkIfInDB($con, $fila, $colonna){
     $defaultSatus = "free";
     $query = "SELECT fila, posto, stato FROM prenotazioni WHERE fila=? AND posto = ?";
@@ -51,5 +19,113 @@ function checkIfInDB($con, $fila, $colonna){
         }
     }
     mysqli_stmt_close($stmt);
+}
+
+function createTable($con, $m, $n){
+    $associaz =  array( 0=>'A', 1=>'B', 2=>'C', 3=>'D', 4=>'E', 5=>'F', 6=>'G', 7=>'H', 8=>'I', 9=>'J', 10=>'K') ;
+    $i = $j = 0;
+    echo "<table>";
+    while ($j < $n  ){  // righe 
+        echo "<tr>"; 
+        $fila = $j+1;
+        $i=0;
+        while ($i < $m  && $i < 25){ // colonne
+
+            $colonna = $associaz[$i];
+           
+            $x = $fila.''.$colonna;
+            $stato = checkIfInDB($con, $fila, $colonna); 
+            if ($stato == 'occupied'){
+               echo "<td><input type='button' class='$stato' name='$x' value='$x' disabled ></td>  ";
+            } else if ($stato == 'booked'){
+                echo "<td ><input type='button' class='$stato' name='$x' value='$x' disabled></td>  ";
+            } else if ($stato == 'free'){
+                echo "<td><input type='button' class='free' name='$x' value='$x' disabled></td>  ";
+            }
+            $i++;
+        }
+        echo "</tr>";
+    $j++;
+    }
+    echo "</table>";
+}
+
+function checkIfInDBUser($con, $fila, $colonna, $user){
+    $defaultSatus = "free";
+
+    $query1 = "SELECT id FROM utenti WHERE username=?";
+    $stmt1 = mysqli_prepare($con, $query1);
+    if (!$stmt1){
+        die ("Errore di query: ".mysqli_error($con));
+    } else {
+        mysqli_stmt_bind_param($stmt1, "s", $user);
+        if (!(mysqli_stmt_execute($stmt1)) ){
+            die("Statement error: ".mysqli_stmt_error($stmt1) );    
+        }else{
+            mysqli_stmt_bind_result($stmt1, $id);
+            if (mysqli_stmt_fetch($stmt1) ){
+                mysqli_stmt_close($stmt1);
+
+                $query2 = "SELECT fila, posto, stato, utente FROM prenotazioni WHERE fila=? AND posto =?";
+                $stmt2 = mysqli_prepare($con, $query2);
+                if (!$stmt2){
+                    die ("Errore di query: ".mysqli_error($con));
+                }  else {
+                    mysqli_stmt_bind_param($stmt2, "si", $fila, $colonna);
+                    if (!(mysqli_stmt_execute($stmt2))){
+                        die("Statement error: ".mysqli_stmt_error($stmt2) );     
+                    } else {
+                        mysqli_stmt_bind_result($stmt2,  $f, $p, $stato, $idUtente);
+                        if( mysqli_stmt_fetch($stmt2) && ($f == $fila && $p == $colonna)){
+                            if ($stato=='occupied' &&  $idUtente==$id){
+                                return $stato."user";
+                            } else {
+                                return $stato;
+                            }
+                        } else {
+                            return $defaultSatus;
+                        }
+                    }
+                }
+                mysqli_stmt_close($stmt2);
+            }
+        }
+    }
+}
+
+
+
+function createEditableTable($con, $m, $n, $user){
+    $associaz =  array( 0=>'A', 1=>'B', 2=>'C', 3=>'D', 4=>'E', 5=>'F', 6=>'G', 7=>'H', 8=>'I', 9=>'J', 10=>'K') ;
+    $i = $j = 0;
+    echo "<table>";
+    while ($j < $n  ){  // righe 
+        echo "<tr>\n"; 
+        $fila = $j+1;
+        $i=0;
+        while ($i < $m  && $i < 25){ // colonne
+
+            $colonna = $associaz[$i];
+           
+            $x = $fila.''.$colonna;
+            $stato = checkIfInDBUser($con, $fila, $colonna, $user); 
+            if ($stato == 'occupied'){
+               echo "<td><input type='button' class='$stato' name='$x' value='$x'></td>\n";
+            }  else if ($stato == 'occupieduser'){
+                echo "<td><input type='button' class='occupieduser' name='$x' value='$x'></td>\n";
+            } else if ($stato == 'booked'){
+                echo "<td ><input type='button' class='$stato' name='$x' value='$x' disabled></td>\n";
+            } else if ($stato == 'free'){
+                echo "<td><input type='button' class='free' name='$x' value='$x'></td>\n";
+            }
+            $i++;
+        }
+        echo "</tr>\n";
+        $j++;   
+    }
+    echo "</table>";
+    echo "<input type='button' name='aggiorna' value='Aggiorna' onclick='window.location.reload()'>";
+    echo "<input type='submit' name='acquista' value='Acquista' >";
+    
 }
 ?>

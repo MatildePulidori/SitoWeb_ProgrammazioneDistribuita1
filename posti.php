@@ -1,11 +1,15 @@
 <?php
 $session = true;
-if( session_status() === PHP_SESSION_DISABLED  )
+if( session_status() === PHP_SESSION_DISABLED ){
     $session = false;
+}
 else if( session_status() !== PHP_SESSION_ACTIVE ){
     session_start();
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
 <?php 
 include 'connectionDB.php';
 include 'checkDB.php';
@@ -13,22 +17,12 @@ include 'createTable.php';
 include 'getInfo.php'; 
 include 'logorsign.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-
-<?php
-
-$log = $sign = false;
-$con  = getConnectionDB();
-$log = checkLoginDB($con);
-$sign = checkRegisterDB($con);
-
-?>
 <meta charset= "utf-8">
   <meta name="author" content="Matilde Pulidori">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel = "stylesheet" type="text/css" href="styleCSS.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="posti.js"></script>
   <title>HOME</title>
 </head>
   
@@ -36,36 +30,40 @@ $sign = checkRegisterDB($con);
 <header>
     <h1>Prenotazioni Aereo</h1>
 </header>
-
 <div class='logorsign'>
+<form method="POST" action="logout.php">
 <?php 
-    if ( $log==false && $sign==false){ 
-            printLoginArea();
-            printSingupArea();
+    $con  = getConnectionDB();
+    $logged = false;
+    if ( isset($_SESSION['user']) && !(empty($_SESSION['user'])) ){
+        $logged=true;
+        echo "Benvenuto ".$_SESSION['user'];
+        echo "<input type='submit' value='Logout'>";
     } else {
-        $redirect = "posti.php";
-        if ($log==true){
-            header('Location: ' .$redirect);
-        } else if ($sign==true){
-            echo "Registrazione avvenuta con successo. \n";
-            header('Location: ' .$redirect);
-        }
-
-    }
+        header('Location: index.php');
+    } 
+    
 ?>
+<form>
 </div>
 
 
 <div class="main">
     <div class="posti">
     <h2>Posti</h2>
-    <form name='f'>
-    <?php 
-        
+    <form name="f" method='POST' action="<?php $_SERVER['PHP_SELF'] ?>">
+
+        <?php
         $m = 10;  // file
         $n = 6;   // posti
         checkOrResetMatrix($con, $m, $n);
-        createTable($con, $m, $n);
+
+        if ($logged==true){
+            createEditableTable($con, $m, $n, $_SESSION['user']);
+        }
+        else{
+            createTable($con, $m, $n);
+        }
         ?>
 
     </form>
@@ -90,6 +88,5 @@ $sign = checkRegisterDB($con);
     </div>
 </div>
 </div>
-<?php mysqli_close($con);?>
 </body>
 </html>

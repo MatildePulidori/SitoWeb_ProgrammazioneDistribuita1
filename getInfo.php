@@ -19,7 +19,7 @@ function getTotal($con){
 
 function getPrenotati($con){
     $totPrenotati = 0;
-    $query= "SELECT totPrenotati FROM parametri";
+    $query= "SELECT count(*) as totPrenotati FROM prenotazioni WHERE stato = 'occupied'";
     $result = mysqli_query($con, $query);
     if (!$result){
         die('Errore di query: '.mysqli_error($con));
@@ -36,8 +36,8 @@ function getPrenotati($con){
 }
 
 function getOccupati($con){
-    $totOccupatii=0;
-    $query= "SELECT totOccupati FROM parametri";
+    $totOccupati=0;
+    $query= "SELECT count(*) as totOccupati FROM prenotazioni WHERE stato = 'booked'";
     $result = mysqli_query($con, $query);
     if (!$result){
         die('Errore di query: '.mysqli_error($con));
@@ -51,7 +51,7 @@ function getOccupati($con){
            
         }
     }
-    return $totOccupatii;
+    return $totOccupati;
 }
 
 ?>

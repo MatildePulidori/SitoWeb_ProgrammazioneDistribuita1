@@ -3,113 +3,132 @@ body{ font-family: sans-serif; line-height: 1.6;
     text-align: center;
     display: block;
     color : black;
-    background-color: floralwhite;
+    background-color: #afd8e5;
   }
 
-.navbar_website {  
-  overflow-x: hidden; 
-  width: 100%; 
-  font-size: 100%;
-  position: absolute;
-  transition: 0.4s;
-  z-index: 99;
-  padding-top: 5%;
-  padding-left: 5%;
-  float: left;
-}
 .logorsign {
   overflow-x: hidden; 
   margin-left: 5%;
+  margin-top: 1%;
   float: left;
   border-style: outset;
-  border-right-color: #c43b3e;
-  border-bottom-color: #c43b3e;
+  border-radius: 4%;
+  border-right-color: #40a1bf;
+  border-bottom-color: #40a1bf;
+  background-color: #d1e8f0;
   transition: 0.4s;
-  width: 40%;
-  font-size: 100%;
+  width: 25%;
+  font-size: 80%;
+  padding: 3%;
 }
+
 .login { 
   float: left; 
   overflow: visible; 
-  padding: 5%;
+  padding-right: 5%;
+  width: 80%;
 }
 .signup { 
-  float: right; 
+  float: left; 
   overflow: visible;
-  padding: 5%;
+  padding-top: 10%;
+  width: 80%;
 }
-
 .logorsign label {
   float: none;
-  background-color: #c43b3e;
-  color:floralwhite;
+  background-color: #40a1bf;
+  border-radius: 5%;
+  color:black;
   text-decoration: none;
   display: block;
   text-align: left;
 }
-label:hover { background-color: #c43b3e; color:floralwhite; }
+.logorsign label:hover { 
+  background-color: #40a1bf; 
+  color:black; 
 
+}
 .login .log-content {
   display: none;
-  position: relative;
   overflow: visible;
-  padding-top: 10%;
+  padding: 10%;
   z-index: 1;
 }
+
 .signup .log-content{
   display: none;
   position: relative;
   overflow: visible;
-  padding-top: 10%;
+  padding: 10%;
   z-index: 1; 
 }
 .login:hover .log-content { display: block;}
 .signup:hover .log-content { display: block;}
 
-.navbar_website input { float:left; padding-right: 5%; padding-top: 10%; padding-bottom: 5%; width: 100%; border-style: outset;}
-.navbar_website input[type=submit]{
+.logorsign input { 
+  float:left; 
+  padding: 10%;
+  margin: 5%;
+  width: 50%; 
+
+  border-style: outset;
+}
+.logorsign input[type=submit]{
 color: black;
-padding-top: 5%;
-padding-bottom: 5%;
+margin: 5%;
 border: outset;
 cursor: pointer;
 }
 
-.main {float: right; margin-right: 10%;}
-h2 {  background-color: #c43b3e; color:floralwhite;}
-.posti {display: block; float: left; }
+.main { margin-right: 10%; }
+h2 {  
+  background-color: #40a1bf; 
+  color:black;
+  border-radius: 5%;
+}
+.posti {display: block; float: left; padding-left: 10%; }
 .info {display: block; float: right; }
-input{ width: 100%;}
-form {
+input{ width: 95%;}
+.posti form {
+  display: block;
   margin-left: auto; 
   margin-right: auto; 
-  background-color: floralwhite; 
+  background-color: #d1e8f0; 
   border-style: outset;
-  border-right-color: #c43b3e;
-  border-bottom-color: #c43b3e;
+  border-radius: 3%;
+  border-right-color: #40a1bf;
+  border-bottom-color: #40a1bf;
   width: 95%;
+  text-align: center;
+  padding: 5%;
 } 
+.posti input[type=button]{
+  border-style: outset;
+  border-radius: 2%;
+}
 .table-info{
   margin-left: auto; 
   margin-right: auto; 
-  background-color: floralwhite; 
+  background-color: #d1e8f0; 
   border-style: outset;
-  border-right-color: #c43b3e;
-  border-bottom-color: #c43b3e;
+  border-radius: 5%;
+  border-right-color: #40a1bf;
+  border-bottom-color: #40a1bf;
   width: 100%;
+  padding: 5%;
 } 
+
 
 label { cursor: pointer;}
 .free {color: green;}
 .free:hover { color: floralwhite; background-color: green;}
-.occupied { color: orange; }
-.occupied:hover { color: floralwhite; background-color: orange;}
-.booked { color: red; }
-.booked:hover { color: floralwhite; background-color: red;}
+.occupied { color: floralwhite; background-color: orange;}
+.booked { color: floralwhite; background-color: red;}
+.occupieduser { color: black; background-color: gold;}
 
 
-
-@media only screen and (max-width: 450px) {
-  body { width: auto;}
-  a {text-align: left; width: 100%; }
+@media only screen and (max-width: 600px) {
+  .logorsign { float: none; clear: both; width: 40%; margin:10%;}
+  .main { float: none; clear: both; width: 100%; margin: auto;}
+  .info  { float: none; clear: both; width: 40%; margin: 10%; padding-top: 5%;}
 }
