@@ -70,7 +70,6 @@ body{ font-family: sans-serif; line-height: 1.6;
   padding: 10%;
   margin: 5%;
   width: 50%; 
-
   border-style: outset;
 }
 .logorsign input[type=submit]{
@@ -98,14 +97,21 @@ input{ width: 95%;}
   border-radius: 3%;
   border-right-color: #40a1bf;
   border-bottom-color: #40a1bf;
-  width: 95%;
+  width: 100%;
   text-align: center;
   padding: 5%;
 } 
-.posti input[type=button]{
-  border-style: outset;
-  border-radius: 2%;
+.posti input[type=checkbox]{
+  display: block;
 }
+.posti input[type=checkbox]+label{
+  display: inline-block;
+  border-style: outset;
+  border-radius: 10%;
+  width: 100%;
+  cursor: pointer;
+}
+
 .table-info{
   margin-left: auto; 
   margin-right: auto; 
@@ -122,7 +128,7 @@ input{ width: 95%;}
 label { cursor: pointer;}
 .free {color: green;}
 .free:hover { color: floralwhite; background-color: green;}
-.occupied { color: floralwhite; background-color: orange;}
+.occupied { color: black; background-color: orange;}
 .booked { color: floralwhite; background-color: red;}
 .occupieduser { color: black; background-color: gold;}
 

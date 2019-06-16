@@ -6,7 +6,7 @@ function checkIfInDB($con, $fila, $colonna){
     if (!$stmt){
         die ("Errore di query: ".mysqli_error($con));
     }  else {
-        mysqli_stmt_bind_param($stmt, "si", $fila, $colonna);
+        mysqli_stmt_bind_param($stmt, "is", $fila, $colonna);
         if (!(mysqli_stmt_execute($stmt))){
             die("Statement error: ".mysqli_stmt_error($stmt5) );     
         } else {
@@ -36,11 +36,11 @@ function createTable($con, $m, $n){
             $x = $fila.''.$colonna;
             $stato = checkIfInDB($con, $fila, $colonna); 
             if ($stato == 'occupied'){
-               echo "<td><input type='button' class='$stato' name='$x' value='$x' disabled ></td>  ";
+               echo "<td class='$stato'><input  type='checkbox' name='$x' value='$x' id='$x' disabled><label for='$x'>$x</label></td>  ";
             } else if ($stato == 'booked'){
-                echo "<td ><input type='button' class='$stato' name='$x' value='$x' disabled></td>  ";
+                echo "<td class='$stato'><input type='checkbox' name='$x' value='$x' id='$x' disabled><label for='$x'>$x</label></td>  ";
             } else if ($stato == 'free'){
-                echo "<td><input type='button' class='free' name='$x' value='$x' disabled></td>  ";
+                echo "<td class='free'><input type='checkbox' name='$x' value='$x' id='$x' disabled><label for='$x'>$x</label></td>  ";
             }
             $i++;
         }
@@ -71,7 +71,7 @@ function checkIfInDBUser($con, $fila, $colonna, $user){
                 if (!$stmt2){
                     die ("Errore di query: ".mysqli_error($con));
                 }  else {
-                    mysqli_stmt_bind_param($stmt2, "si", $fila, $colonna);
+                    mysqli_stmt_bind_param($stmt2, "is", $fila, $colonna);
                     if (!(mysqli_stmt_execute($stmt2))){
                         die("Statement error: ".mysqli_stmt_error($stmt2) );     
                     } else {
@@ -98,7 +98,8 @@ function checkIfInDBUser($con, $fila, $colonna, $user){
 function createEditableTable($con, $m, $n, $user){
     $associaz =  array( 0=>'A', 1=>'B', 2=>'C', 3=>'D', 4=>'E', 5=>'F', 6=>'G', 7=>'H', 8=>'I', 9=>'J', 10=>'K') ;
     $i = $j = 0;
-    echo "<table>";
+    
+    echo "<table>\n"; 
     while ($j < $n  ){  // righe 
         echo "<tr>\n"; 
         $fila = $j+1;
@@ -110,22 +111,24 @@ function createEditableTable($con, $m, $n, $user){
             $x = $fila.''.$colonna;
             $stato = checkIfInDBUser($con, $fila, $colonna, $user); 
             if ($stato == 'occupied'){
-               echo "<td><input type='button' class='$stato' name='$x' value='$x'></td>\n";
+               echo "<td class='$stato'><input type='checkbox' name='posti[]' value='$x' id='$x'><label for='$x'>$x</label></td>\n";
             }  else if ($stato == 'occupieduser'){
-                echo "<td><input type='button' class='occupieduser' name='$x' value='$x'></td>\n";
+                echo "<td class='occupieduser'><input type='checkbox' name='posti[]' value='$x' id='$x'><label for='$x'>$x</label></td>\n";
             } else if ($stato == 'booked'){
-                echo "<td ><input type='button' class='$stato' name='$x' value='$x' disabled></td>\n";
+                echo "<td class='$stato'><input type='checkbox' name='posti[]' value='$x' id='$x' disabled ><label for='$x'>$x</label></td>\n";
             } else if ($stato == 'free'){
-                echo "<td><input type='button' class='free' name='$x' value='$x'></td>\n";
+                echo "<td class='free'><input type='checkbox' name='posti[]' value='$x' id='$x'><label for='$x'>$x</label></td>\n";
             }
             $i++;
         }
         echo "</tr>\n";
         $j++;   
     }
-    echo "</table>";
-    echo "<input type='button' name='aggiorna' value='Aggiorna' onclick='window.location.reload()'>";
-    echo "<input type='submit' name='acquista' value='Acquista' >";
+    echo "</table>\n";
+    echo "<input type='button' name='aggiorna' value='Aggiorna' onclick='window.location.reload()'>\n";
+    echo "<input type='submit' name='acquista' value='Acquista' >\n";
+
+ 
     
 }
 ?>

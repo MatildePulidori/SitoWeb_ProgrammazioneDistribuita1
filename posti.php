@@ -6,6 +6,10 @@ if( session_status() === PHP_SESSION_DISABLED ){
 else if( session_status() !== PHP_SESSION_ACTIVE ){
     session_start();
 }
+if (!isset($_SESSION['logged'])){
+    header('Location: index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +25,7 @@ include 'logorsign.php';
   <meta name="author" content="Matilde Pulidori">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel = "stylesheet" type="text/css" href="styleCSS.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script src="jquery-3.4.1.js"></script>
   <script type="text/javascript" src="posti.js"></script>
   <title>HOME</title>
 </head>
@@ -31,50 +35,45 @@ include 'logorsign.php';
     <h1>Prenotazioni Aereo</h1>
 </header>
 <div class='logorsign'>
-<form method="POST" action="logout.php">
+<form name='logorsign' method="POST" action="logout.php">
 <?php 
     $con  = getConnectionDB();
     $logged = false;
     if ( isset($_SESSION['user']) && !(empty($_SESSION['user'])) ){
         $logged=true;
-        echo "Benvenuto ".$_SESSION['user'];
+        $_SESSION['logged']="yes";
+        echo "<label>Benvenuto ".$_SESSION['user']."</label>";
         echo "<input type='submit' value='Logout'>";
-    } else {
-        header('Location: index.php');
-    } 
+    }
     
 ?>
-<form>
+</form>
 </div>
 
 
 <div class="main">
     <div class="posti">
     <h2>Posti</h2>
-    <form name="f" method='POST' action="<?php $_SERVER['PHP_SELF'] ?>">
-
-        <?php
+    <form name='formposti' method='POST' action='acquista.php'> 
+    <?php 
+        
         $m = 10;  // file
         $n = 6;   // posti
+        $_SESSION['n']=$n;
+        $_SESSION['m']=$n;
         checkOrResetMatrix($con, $m, $n);
-
         if ($logged==true){
             createEditableTable($con, $m, $n, $_SESSION['user']);
         }
-        else{
-            createTable($con, $m, $n);
-        }
-        ?>
-
+    ?>
     </form>
     </div>
-
-    
     <?php 
         $total = getTotal($con);
         $occupied= getPrenotati($con);
         $booked = getOccupati($con);
         $free = $total - ($booked + $occupied);
+        mysqli_close($con);
     ?>
     <div class="info"> 
     <h2>Info</h2>

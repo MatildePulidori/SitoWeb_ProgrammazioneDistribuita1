@@ -18,7 +18,9 @@ include 'logorsign.php';
 <head>
 
 <?php
-
+if (isset($_SESSION['logged']) && $_SESSION['logged']=="yes"){
+    header('Location: posti.php');
+}
 $log = $sign = false;
 $con  = getConnectionDB();
 $log = checkLoginDB($con);
@@ -44,9 +46,9 @@ $sign = checkRegisterDB($con);
             printSingupArea();
     } else {
         $redirect = "posti.php";
-        if ($log==true){
+        if ($log===true){
             header('Location: ' .$redirect);
-        } else if ($sign==true){
+        } else if ($sign===true){
             echo "Registrazione avvenuta con successo. \n";
             header('Location: ' .$redirect);
         }
