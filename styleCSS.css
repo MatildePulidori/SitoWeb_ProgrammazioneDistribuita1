@@ -73,11 +73,24 @@ body{ font-family: sans-serif; line-height: 1.6;
   border-style: outset;
 }
 .logorsign input[type=submit]{
-color: black;
-margin: 5%;
-border: outset;
-cursor: pointer;
+  color: black;
+  margin: 5%;
+  border: outset;
+  border-radius: 5%; 
+  cursor: pointer;
+  width: 50%;
 }
+
+textarea{
+  background-color: #40a1bf;
+  color: black;
+  float: left;
+  width: 100%;
+  font-size: 100%;
+  border-radius: 5%;
+  border-style: none;
+}
+
 
 .main { margin-right: 10%; }
 h2 {  
@@ -102,7 +115,7 @@ input{ width: 95%;}
   padding: 5%;
 } 
 .posti input[type=checkbox]{
-  display: block;
+  display: none;
 }
 .posti input[type=checkbox]+label{
   display: inline-block;

@@ -41,6 +41,12 @@ $sign = checkRegisterDB($con);
 
 <div class='logorsign'>
 <?php 
+     if (isset($_GET['msg'])){
+         echo "<textarea form readonly>";
+         echo $_GET['msg'];
+         echo "</textarea>";
+     }
+    
     if ( $log==false && $sign==false){ 
             printLoginArea();
             printSingupArea();

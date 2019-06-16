@@ -9,6 +9,8 @@ else if( session_status() !== PHP_SESSION_ACTIVE ){
 if (!isset($_SESSION['logged'])){
     header('Location: index.php');
 }
+include 'inactivity.php';
+checkInactivity();
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +22,7 @@ include 'checkDB.php';
 include 'createTable.php';
 include 'getInfo.php'; 
 include 'logorsign.php';
+
 ?>
 <meta charset= "utf-8">
   <meta name="author" content="Matilde Pulidori">
@@ -45,9 +48,17 @@ include 'logorsign.php';
         echo "<label>Benvenuto ".$_SESSION['user']."</label>";
         echo "<input type='submit' value='Logout'>";
     }
-    
 ?>
 </form>
+    
+    <?php
+    if (isset($_GET['msg'])){
+        echo "<textarea form readonly>";
+        echo $_GET['msg'];
+        echo "</textarea>";
+    }
+    ?>
+    
 </div>
 
 

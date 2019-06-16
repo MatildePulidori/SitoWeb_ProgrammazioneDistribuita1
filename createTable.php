@@ -113,9 +113,9 @@ function createEditableTable($con, $m, $n, $user){
             if ($stato == 'occupied'){
                echo "<td class='$stato'><input type='checkbox' name='posti[]' value='$x' id='$x'><label for='$x'>$x</label></td>\n";
             }  else if ($stato == 'occupieduser'){
-                echo "<td class='occupieduser'><input type='checkbox' name='posti[]' value='$x' id='$x'><label for='$x'>$x</label></td>\n";
+                echo "<td class='occupieduser'><input type='checkbox' name='posti[]' value='$x' id='$x' checked><label for='$x'>$x</label></td>\n";
             } else if ($stato == 'booked'){
-                echo "<td class='$stato'><input type='checkbox' name='posti[]' value='$x' id='$x' disabled ><label for='$x'>$x</label></td>\n";
+                echo "<td class='$stato'><input type='checkbox' name='posti[]' value='$x' id='$x' disabled><label for='$x'>$x</label></td>\n";
             } else if ($stato == 'free'){
                 echo "<td class='free'><input type='checkbox' name='posti[]' value='$x' id='$x'><label for='$x'>$x</label></td>\n";
             }
