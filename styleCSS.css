@@ -4,24 +4,71 @@ body{ font-family: sans-serif; line-height: 1.6;
     display: block;
     color : black;
     background-color: #afd8e5;
+    background-image: url("backimage.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
+#body{
+  display: block;
+}
+
+/* div logorsign */
 .logorsign {
+  float: left;
   overflow-x: hidden; 
+
+  padding: 3%;
   margin-left: 5%;
   margin-top: 1%;
-  float: left;
+ 
   border-style: outset;
   border-radius: 4%;
   border-right-color: #40a1bf;
   border-bottom-color: #40a1bf;
   background-color: #d1e8f0;
-  transition: 0.4s;
-  width: 25%;
+
+  width: 20%;
+  height: 100%;
   font-size: 80%;
-  padding: 3%;
+}
+.logorsign label {
+  float: none;
+  display: block;
+  text-align: left;
+
+  color:black;
+  background-color: #40a1bf;
+  border-radius: 5%;  
+}
+.logorsign label:hover { 
+  background-color: #40a1bf; 
+  color:black; 
+}
+.logorsign input { 
+  float:left; 
+  padding: 10%;
+  margin: 5%;
+  width: 50%; 
+  height: 20%;
+  border-style: outset;
+}
+.logorsign input[type=submit]{
+  color: black;
+  margin: 5%;
+  border: outset;
+  border-radius: 5%; 
+  cursor: pointer;
+  width: 50%;
+  height: 20%;
+  float: center;
+}
+.logorsign div{
+  float: left;
 }
 
+
+/* div logorsign --> login & signup*/
 .login { 
   float: left; 
   overflow: visible; 
@@ -34,20 +81,8 @@ body{ font-family: sans-serif; line-height: 1.6;
   padding-top: 10%;
   width: 80%;
 }
-.logorsign label {
-  float: none;
-  background-color: #40a1bf;
-  border-radius: 5%;
-  color:black;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-.logorsign label:hover { 
-  background-color: #40a1bf; 
-  color:black; 
 
-}
+/* div logorsign --> login & signup --> log-content */
 .login .log-content {
   display: none;
   overflow: visible;
@@ -65,42 +100,17 @@ body{ font-family: sans-serif; line-height: 1.6;
 .login:hover .log-content { display: block;}
 .signup:hover .log-content { display: block;}
 
-.logorsign input { 
-  float:left; 
-  padding: 10%;
-  margin: 5%;
-  width: 50%; 
-  border-style: outset;
-}
-.logorsign input[type=submit]{
-  color: black;
-  margin: 5%;
-  border: outset;
-  border-radius: 5%; 
-  cursor: pointer;
-  width: 50%;
-}
-
-textarea{
-  background-color: #40a1bf;
-  color: black;
-  float: left;
-  width: 100%;
-  font-size: 100%;
-  border-radius: 5%;
-  border-style: none;
-}
 
 
+/* div main */
 .main { margin-right: 10%; }
 h2 {  
   background-color: #40a1bf; 
   color:black;
   border-radius: 5%;
 }
+/* div main --> posti */
 .posti {display: block; float: left; padding-left: 10%; }
-.info {display: block; float: right; }
-input{ width: 95%;}
 .posti form {
   display: block;
   margin-left: auto; 
@@ -125,6 +135,9 @@ input{ width: 95%;}
   cursor: pointer;
 }
 
+/* div main --> infor */
+.info {display: block; float: right; }
+input{ width: 95%;}
 .table-info{
   margin-left: auto; 
   margin-right: auto; 
@@ -137,7 +150,7 @@ input{ width: 95%;}
   padding: 5%;
 } 
 
-
+/* css for the different checkboxes */
 label { cursor: pointer;}
 .free {color: green;}
 .free:hover { color: floralwhite; background-color: green;}
@@ -146,6 +159,8 @@ label { cursor: pointer;}
 .occupieduser { color: black; background-color: gold;}
 
 
+
+/*if the screen is <600px */
 @media only screen and (max-width: 600px) {
   .logorsign { float: none; clear: both; width: 40%; margin:10%;}
   .main { float: none; clear: both; width: 100%; margin: auto;}
